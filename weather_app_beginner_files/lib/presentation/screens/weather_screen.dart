@@ -12,33 +12,9 @@ class WeatherScreen extends StatefulWidget {
 }
 
 class _WeatherScreenState extends State<WeatherScreen> {
-  late Future<Map<String, dynamic>> weather;
-
-  // Future<Map<String, dynamic>> getCurrentWeather() async {
-  //   try {
-  //     String cityName = 'London';
-  //     final res = await http.get(
-  //       Uri.parse(
-  //         'https://api.openweathermap.org/data/2.5/forecast?q=$cityName&APPID=$openWeatherAPIKey',
-  //       ),
-  //     );
-
-  //     final data = jsonDecode(res.body);
-
-  //     if (data['cod'] != '200') {
-  //       throw 'An unexpected error occurred';
-  //     }
-
-  //     return data;
-  //   } catch (e) {
-  //     throw e.toString();
-  //   }
-  // }
-
   @override
   void initState() {
     super.initState();
-    weather = getCurrentWeather();
   }
 
   @override

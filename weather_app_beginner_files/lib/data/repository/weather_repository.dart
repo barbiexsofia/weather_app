@@ -7,7 +7,7 @@ class WeatherRepository {
   final WeatherDataProvider weatherDataProvider;
   WeatherRepository(this.weatherDataProvider);
 
-  Future<WeatherModel> getCurrentWeather(dynamic weatherModel) async {
+  Future<WeatherModel> getCurrentWeather() async {
     try {
       String cityName = 'London';
       final weatherData = await weatherDataProvider.getCurrentWeather(cityName);
@@ -18,7 +18,7 @@ class WeatherRepository {
         throw 'An unexpected error occurred';
       }
 
-      return weatherModel.fromJSON(weatherData);
+      return WeatherModel.fromMap(data);
     } catch (e) {
       throw e.toString();
     }
