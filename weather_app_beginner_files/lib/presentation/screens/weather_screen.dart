@@ -1,11 +1,8 @@
-import 'dart:convert';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:weather_app/additional_info_item.dart';
-import 'package:weather_app/hourly_forecast_item.dart';
-import 'package:http/http.dart' as http;
-import 'package:weather_app/secrets.dart';
+import 'package:weather_app/presentation/widgets/additional_info_item.dart';
+import 'package:weather_app/presentation/widgets/hourly_forecast_item.dart';
 
 class WeatherScreen extends StatefulWidget {
   const WeatherScreen({super.key});
@@ -17,26 +14,26 @@ class WeatherScreen extends StatefulWidget {
 class _WeatherScreenState extends State<WeatherScreen> {
   late Future<Map<String, dynamic>> weather;
 
-  Future<Map<String, dynamic>> getCurrentWeather() async {
-    try {
-      String cityName = 'London';
-      final res = await http.get(
-        Uri.parse(
-          'https://api.openweathermap.org/data/2.5/forecast?q=$cityName&APPID=$openWeatherAPIKey',
-        ),
-      );
+  // Future<Map<String, dynamic>> getCurrentWeather() async {
+  //   try {
+  //     String cityName = 'London';
+  //     final res = await http.get(
+  //       Uri.parse(
+  //         'https://api.openweathermap.org/data/2.5/forecast?q=$cityName&APPID=$openWeatherAPIKey',
+  //       ),
+  //     );
 
-      final data = jsonDecode(res.body);
+  //     final data = jsonDecode(res.body);
 
-      if (data['cod'] != '200') {
-        throw 'An unexpected error occurred';
-      }
+  //     if (data['cod'] != '200') {
+  //       throw 'An unexpected error occurred';
+  //     }
 
-      return data;
-    } catch (e) {
-      throw e.toString();
-    }
-  }
+  //     return data;
+  //   } catch (e) {
+  //     throw e.toString();
+  //   }
+  // }
 
   @override
   void initState() {
@@ -80,16 +77,6 @@ class _WeatherScreenState extends State<WeatherScreen> {
               child: Text(snapshot.error.toString()),
             );
           }
-
-          final data = snapshot.data!;
-
-          final currentWeatherData = data['list'][0];
-
-          final currentTemp = currentWeatherData['main']['temp'];
-          final currentSky = currentWeatherData['weather'][0]['main'];
-          final currentPressure = currentWeatherData['main']['pressure'];
-          final currentWindSpeed = currentWeatherData['wind']['speed'];
-          final currentHumidity = currentWeatherData['main']['humidity'];
 
           return Padding(
             padding: const EdgeInsets.all(16.0),
